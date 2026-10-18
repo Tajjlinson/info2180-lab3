@@ -22,6 +22,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
         //Exercise 2: place X or O click
         square.addEventListener("click", function() {
+            //Exercise 6 ignore clicks on square taken already
+            if (gameState[index] !== ""){
+                return;
+            }
+
             gameState[index] = currentPlayer;
             square.textContent = currentPlayer;
             square.classList.add(currentPlayer);
