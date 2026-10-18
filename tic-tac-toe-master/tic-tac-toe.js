@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function() {
     //Gets all the divs inside the game board
     const squares = document.querySelectorAll("#board div");
     const status = document.getElementById("status");
+    const newGameBtn = document.querySelector(".btn");
+
+    const defaultStatus = status.textContent;
 
     let gameState = ["","","","","","","","","",];
     let currentPlayer = "X";
@@ -24,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
             square.classList.add(currentPlayer);
 
             if(checkWinner()) {
-                status.textContent = "Congratulations! " + currentPlayer + "is the Winner!";
+                status.textContent = "Congratulations! " + currentPlayer + " is the Winner!";
                 status.classList.add("you-won");
                 return;
             }
@@ -43,6 +46,20 @@ document.addEventListener("DOMContentLoaded", function() {
             square.classList.remove("hover");
         });
     });
+
+    //Exercise 5 new game resets the game
+    newGameBtn.addEventListener("click", function () {
+        gameState = ["", "", "", "", "", "", "", "", "",];
+        currentPlayer = "X";
+
+        squares.forEach(function (square) {
+            square.textContent = "";
+            square.classList.remove("X", "O");
+        });
+
+        status.textContent = defaultStatus;
+        status.classList.remove("you-won");
+    })
 
     function checkWinner() {
         return winningCombos.some(function (combo) {
